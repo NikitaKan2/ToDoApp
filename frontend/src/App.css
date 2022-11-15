@@ -132,3 +132,9 @@
   transition: all .2s;
   background-color: rgb(40, 122, 64);
 }
+
+.sort-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
