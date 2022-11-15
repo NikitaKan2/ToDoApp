@@ -1,0 +1,134 @@
+.App {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 70px 0;
+  min-height: 100vh;
+  text-align: center;
+  background-color: #b0adadbb;
+  box-shadow: 2px 1px 62px 13px rgba(34, 60, 80, 0.25);
+}
+
+.todoListHeader {
+  font-size: 40px;
+}
+
+.taskInput {
+  min-width: 350px;
+  padding: 12px 15px;
+  border: 1px solid black;
+  border-radius: 5px 0px 0px 5px;
+}
+
+.taskForm {
+  margin-bottom: 15px;
+}
+
+.formButton {
+  color: aliceblue;
+  background-color: rgb(28, 82, 44);
+  padding: 11px 8px;
+  border-radius: 0px 5px 5px 0px;
+}
+
+.formButton:hover {
+  transition: all .2s;
+  background-color: rgb(40, 122, 64);
+}
+
+.todo {
+  display: flex;
+  min-width: 500px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 5px 15px;
+  min-height: 50px;
+  border-radius: 4px 4px 4px 4px;
+  background-color: black;
+  color: #e8e8e8;
+}
+
+.iconDone {
+  width: 30px;
+  height: 30px;
+}
+
+.iconDone {
+  color: greenyellow;
+  transition: all .5s;
+}
+
+.iconDone:hover {
+  transform: scale(1.4);
+  color: greenyellow;
+  cursor: pointer;
+}
+
+.todo-complete {
+  display: flex;
+  min-width: 500px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding: 5px 15px;
+  min-height: 50px;
+  border-radius: 4px 4px 4px 4px;
+  color: #e8e8e8;
+  text-decoration: line-through;
+  background-color: black;
+}
+
+.notAdd {
+  font-size: 30px;
+  margin-top: 50px;
+}
+
+.icons {
+  padding-left: 10px;
+}
+
+.todoContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;  
+}
+
+.iconEdit {
+  margin-right: 10px;
+  transition: all .4s;
+}
+
+.iconEdit:hover {
+  transform: scale(1.4);
+  color: rgb(0, 145, 255);
+  cursor: pointer;
+}
+
+.iconClose:hover {
+  transform: scale(1.4);
+  color: red;
+  cursor: pointer;
+}
+
+.iconClose {
+  transition: all .4s;
+}
+
+.todo:hover {
+  transition: all .2s;
+  background-color: rgb(47, 39, 39);
+}
+
+.sortButton {
+  margin-bottom: 5px;
+  color: aliceblue;
+  background-color: rgb(28, 82, 44);
+  padding: 11px 8px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.sortButton:hover {
+  transition: all .2s;
+  background-color: rgb(40, 122, 64);
+}
