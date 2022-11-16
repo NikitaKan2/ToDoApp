@@ -1,12 +1,12 @@
 import React from 'react';
 import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
 
-const SortByData = () => (
-  <div className="conteiner-sort-data">
-    <span className="text-data">Sort By Data</span>
-    <AiOutlineArrowUp className="arrow-up" />
-    <AiOutlineArrowDown className="arrow-down" />
+const SortByDate = ({ sortPosts }) => (
+  <div className="conteiner-sort-arrows">
+    <span className="text-sort">Sort By Data</span>
+    <AiOutlineArrowUp onClick={() => sortPosts('up')} className="arrow-up" />
+    <AiOutlineArrowDown onClick={() => sortPosts('down')} className="arrow-down" />
   </div>
 );
 
-export default SortByData;
+export default SortByDate;

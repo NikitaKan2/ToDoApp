@@ -4,39 +4,46 @@
   padding: 70px 0;
   min-height: 100vh;
   text-align: center;
-  background-color: #b0adadbb;
+  background-color: #333;
   box-shadow: 2px 1px 62px 13px rgba(34, 60, 80, 0.25);
 }
 
-.todoListHeader {
+.todo-list-header {
   font-size: 40px;
+  color: white;
 }
 
-.taskInput {
+button:active {
+  background-color: rgb(57, 143, 83);
+}
+
+.task-input {
   min-width: 350px;
   padding: 12px 15px;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 5px 0px 0px 5px;
 }
 
-.taskForm {
+.task-form {
   margin-bottom: 15px;
 }
 
-.formButton {
+.form-button {
   color: aliceblue;
   background-color: rgb(28, 82, 44);
   padding: 11px 8px;
   border-radius: 0px 5px 5px 0px;
 }
 
-.formButton:hover {
+.form-button:hover {
   transition: all .2s;
   background-color: rgb(40, 122, 64);
 }
 
 .todo {
   display: flex;
+  flex-grow: 1;
+  word-break: break-all;
   min-width: 500px;
   align-items: center;
   justify-content: space-between;
@@ -44,21 +51,21 @@
   padding: 5px 15px;
   min-height: 50px;
   border-radius: 4px 4px 4px 4px;
-  background-color: black;
+  background-color: #555;
   color: #e8e8e8;
 }
 
-.iconDone {
+.icon-done {
   width: 30px;
   height: 30px;
 }
 
-.iconDone {
+.icon-done {
   color: greenyellow;
   transition: all .5s;
 }
 
-.iconDone:hover {
+.icon-done:hover {
   transform: scale(1.4);
   color: greenyellow;
   cursor: pointer;
@@ -78,7 +85,7 @@
   background-color: black;
 }
 
-.notAdd {
+.not-add {
   font-size: 30px;
   margin-top: 50px;
 }
@@ -87,31 +94,35 @@
   padding-left: 10px;
 }
 
-.todoContainer {
+.todo-container {
   display: flex;
+  max-width: 500px;
+  margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;  
 }
 
-.iconEdit {
+.icon-edit {
   margin-right: 10px;
   transition: all .4s;
 }
 
-.iconEdit:hover {
+.icon-edit:hover {
   transform: scale(1.4);
   color: rgb(0, 145, 255);
   cursor: pointer;
 }
 
-.iconClose:hover {
+.icon-close:hover {
   transform: scale(1.4);
   color: red;
   cursor: pointer;
 }
 
-.iconClose {
+.icon-close {
+  width: 22px;
+  height: 22px;
   transition: all .4s;
 }
 
@@ -120,7 +131,7 @@
   background-color: rgb(47, 39, 39);
 }
 
-.sortButton {
+.sort-button {
   margin-bottom: 5px;
   color: aliceblue;
   background-color: rgb(28, 82, 44);
@@ -128,7 +139,7 @@
   border-radius: 5px 5px 5px 5px;
 }
 
-.sortButton:hover {
+.sort-button:hover {
   transition: all .2s;
   background-color: rgb(40, 122, 64);
 }
@@ -137,4 +148,131 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  min-width: 450px;
+  margin-bottom: 15px;  
 }
+
+.conteiner-sort-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 11px 8px;
+  color: white;
+  background-color: rgb(28, 82, 44);
+}
+
+.sort-button:not(:last-child) {
+  margin-right: 10px;
+}
+
+.arrow-up {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.arrow-up:hover {
+  transition: all 0.5s;
+  color: greenyellow;
+}
+
+.text-sort {
+  display: block;
+  margin-right: 5px;
+}
+
+.arrow-down {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.arrow-down:hover {
+  transition: all 0.5s;
+  color: red;
+}
+
+
+.todo-text {
+  display: inline;
+  padding-right: 15px;
+}
+
+.left-container {
+  display: flex;
+  align-items: center;
+}
+
+.right-container {
+  display: flex;
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  border-radius: 5px;
+  background-color: rgb(40, 122, 64);
+  cursor: pointer;
+}
+
+.page-link {
+  padding: 10px 15px;
+}
+
+.todo-date { 
+  word-break: keep-all;
+}
+
+
+@media (min-width: 320px) and (max-width: 486px) {
+
+  .form-button {
+    border-radius: 0 0 5px 5px;
+  }
+
+  .sort-button-container {
+    display: flex;
+    flex-direction: column;
+    column-count: 1;
+    column-gap: 5px;
+  }
+
+  .buttons {
+    margin-bottom: 10px;
+  }
+
+  .conteiner-sort-arrows {
+    background-color: rgb(28, 82, 44);
+    margin-bottom: 15px;
+  }
+
+  .todo-container {
+    margin: 0 auto;
+    max-width: 390px;
+  }
+
+  .todo {
+    min-width: 100px;
+    max-width: none;
+    width: 360px;
+  }
+
+  .todo-complete {
+    min-width: 100px;
+    max-width: none;
+    width: 360px;
+  }
+
+ }

@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+import uniqid from 'uniqid';
 
 const TodoForm = (props) => {
-  const { edit } = props;
-
-  const [input, setInput] = useState(edit ? edit.value : '');
+  const [input, setInput] = useState('');
 
   const inputRef = useRef(null);
 
@@ -21,43 +20,29 @@ const TodoForm = (props) => {
 
     const { onSubmit } = props;
     onSubmit({
-      id: Date.now(),
-      text: input,
+      id: uniqid(),
+      title: input,
+      completed: false,
+      status: 'all',
+      date: new Date().toLocaleDateString('ru-RU'),
+      dateForSort: Date.now(),
     });
 
     setInput('');
   };
 
   return (
-    <form className="taskForm" onSubmit={handleSubmit}>
-      {edit ? (
-        <>
-          <input
-            type="text"
-            placeholder="Update Todo"
-            value={input}
-            name="text"
-            className="taskInput"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <button className="formButton" type="submit">Update Todo</button>
-        </>
-      )
-        : (
-          <>
-            <input
-              type="text"
-              placeholder="I want to..."
-              value={input}
-              name="text"
-              className="taskInput"
-              onChange={handleChange}
-              ref={inputRef}
-            />
-            <button className="formButton" type="submit">Add todo</button>
-          </>
-        )}
+    <form className="task-form" onSubmit={handleSubmit}>
+      <input
+        type="title"
+        placeholder="I want to..."
+        value={input}
+        name="title"
+        className="task-input"
+        onChange={handleChange}
+        ref={inputRef}
+      />
+      <button className="form-button" type="submit">Add todo</button>
     </form>
   );
 };
