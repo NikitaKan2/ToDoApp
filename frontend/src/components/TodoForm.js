@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import uniqid from 'uniqid';
 
-const TodoForm = (props) => {
+const TodoForm = ({ onSubmit }) => {
   const [input, setInput] = useState('');
 
   const inputRef = useRef(null);
@@ -18,12 +18,10 @@ const TodoForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const { onSubmit } = props;
     onSubmit({
       id: uniqid(),
       title: input,
       completed: false,
-      status: 'all',
       date: new Date().toLocaleDateString('ru-RU'),
       dateForSort: Date.now(),
     });

@@ -13,6 +13,11 @@
   color: white;
 }
 
+.todo {
+  min-height: 100px;
+  min-width: 700px;
+}
+
 button:active {
   background-color: rgb(57, 143, 83);
 }
@@ -44,20 +49,22 @@ button:active {
   display: flex;
   flex-grow: 1;
   word-break: break-all;
-  min-width: 500px;
+  min-width: 650px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
   padding: 5px 15px;
-  min-height: 50px;
+  min-height: 65px;
   border-radius: 4px 4px 4px 4px;
   background-color: #555;
   color: #e8e8e8;
 }
 
 .icon-done {
+  display: flex;
   width: 30px;
   height: 30px;
+  padding-right: 5px;
 }
 
 .icon-done {
@@ -73,12 +80,12 @@ button:active {
 
 .todo-complete {
   display: flex;
-  min-width: 500px;
+  min-width: 650px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
   padding: 5px 15px;
-  min-height: 50px;
+  min-height: 65px;
   border-radius: 4px 4px 4px 4px;
   color: #e8e8e8;
   text-decoration: line-through;
@@ -91,6 +98,7 @@ button:active {
 }
 
 .icons {
+  display: flex;
   padding-left: 10px;
 }
 
@@ -235,6 +243,14 @@ button:active {
   word-break: keep-all;
 }
 
+.sort-button-active {
+  margin-bottom: 5px;
+  color: aliceblue;
+  background-color: rgb(61, 164, 92);
+  padding: 11px 8px;
+  border-radius: 5px 5px 5px 5px;
+  margin-right: 10px;
+}
 
 @media (min-width: 320px) and (max-width: 486px) {
 
