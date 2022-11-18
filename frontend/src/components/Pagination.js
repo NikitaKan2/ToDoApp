@@ -3,7 +3,6 @@
 import React from 'react';
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }) => {
-  console.log(totalPosts);
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i += 1) {

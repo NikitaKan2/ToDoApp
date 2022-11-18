@@ -53,7 +53,6 @@ button:active {
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
-  padding: 5px 15px;
   min-height: 65px;
   border-radius: 4px 4px 4px 4px;
   background-color: #555;
@@ -64,32 +63,32 @@ button:active {
   display: flex;
   width: 30px;
   height: 30px;
-  padding-right: 5px;
+  color: black;
+  transition: all .5s;
 }
 
 .icon-done {
-  color: greenyellow;
   transition: all .5s;
 }
 
 .icon-done:hover {
   transform: scale(1.4);
-  color: greenyellow;
+  color: rgb(37, 112, 22);
   cursor: pointer;
 }
 
 .todo-complete {
   display: flex;
+  flex-grow: 1;
+  word-break: break-all;
   min-width: 650px;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 15px;
-  padding: 5px 15px;
   min-height: 65px;
   border-radius: 4px 4px 4px 4px;
-  color: #e8e8e8;
-  text-decoration: line-through;
   background-color: black;
+  text-decoration: line-through;
 }
 
 .not-add {
@@ -100,6 +99,11 @@ button:active {
 .icons {
   display: flex;
   padding-left: 10px;
+  background-color: red;
+  width: 45px;
+  height: 65px;
+  align-items: center;
+  border-radius: 0px 5px 5px 0px;
 }
 
 .todo-container {
@@ -124,7 +128,7 @@ button:active {
 
 .icon-close:hover {
   transform: scale(1.4);
-  color: red;
+  color: rgb(143, 47, 47);
   cursor: pointer;
 }
 
@@ -206,6 +210,7 @@ button:active {
 .todo-text {
   display: inline;
   padding-right: 15px;
+  padding-left: 10px;
 }
 
 .left-container {
@@ -239,7 +244,8 @@ button:active {
   padding: 10px 15px;
 }
 
-.todo-date { 
+.todo-date {
+  padding-right: 5px;
   word-break: keep-all;
 }
 
@@ -252,7 +258,17 @@ button:active {
   margin-right: 10px;
 }
 
-@media (min-width: 320px) and (max-width: 486px) {
+.container-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 45px;
+  height: 65px;
+  border-radius: 5px 0px 0px 5px;
+  background-color: greenyellow;
+}
+
+@media (min-width: 320px) and (max-width: 502px) {
 
   .form-button {
     border-radius: 0 0 5px 5px;
