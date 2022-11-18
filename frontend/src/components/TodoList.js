@@ -25,7 +25,7 @@ const TodoList = () => {
   const [selectedSort, setSelectedSort] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [currentFilter, setCurrentFilter] = useState(filters.ALL.value);
-  const postsPerPage = 7;
+  const postsPerPage = 5;
 
   const filterTasks = (tasks) => {
     if (currentFilter === 'all') {
@@ -89,8 +89,20 @@ const TodoList = () => {
   const currentPosts = useMemo(() => {
     const lastIndex = currentPage * postsPerPage;
     const firstIndex = lastIndex - postsPerPage;
-    return filteredTodos.slice(firstIndex, lastIndex);
+    const todosToPage = filteredTodos.slice(firstIndex, lastIndex);
+    if (todosToPage.length > postsPerPage) {
+      setCurrentPage(currentPage - 1);
+    }
+    return todosToPage;
   }, [currentPage, todos, selectedSort, currentFilter]);
+
+  const updateTodo = (todoId, newValue) => {
+    if (!newValue.text) {
+      return;
+    }
+
+    setTodos((prev) => prev.map((item) => (item.id === todoId ? newValue : item)));
+  };
 
   return (
     <div className="todo-container">
@@ -104,8 +116,10 @@ const TodoList = () => {
         todos={currentPosts}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
+        updateTodo={updateTodo}
+        selectedSort={selectedSort}
       />
-      <Pagination postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
+      <Pagination setCurrentPage={setCurrentPage} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
     </div>
   );
 };

@@ -185,6 +185,39 @@ button:active {
   cursor: pointer;
 }
 
+.arrow-up-active {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: greenyellow;
+}
+
+
+.arrow-left {
+  width: 40px;
+  height: 40px;
+  margin-right: 25px;
+}
+
+.arrow-left:hover,
+.arrow-right:hover {
+  color: greenyellow;
+}
+
+.arrow-right {
+  width: 40px;
+  height: 40px;
+}
+
+
+
+.arrow-down-active {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  color: red;
+}
 .arrow-up:hover {
   transition: all 0.5s;
   color: greenyellow;
