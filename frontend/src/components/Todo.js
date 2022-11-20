@@ -9,49 +9,47 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 import uniqid from 'uniqid';
 import SortByDate from './SortByData';
-import TodoForm from './TodoForm';
 
-const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, completeTodo, removeTodo, updateTodo }) => {
-  const [edit, setEdit] = useState({
-    id: null,
-    title: '',
-    state: false,
-  });
+const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, completeTodo, removeTodo }) => {
+  const [edit, setEdit] = useState(false);
 
-  const submitUpdate = (title) => {
-    updateTodo(edit.id, title);
-    setEdit({
-      id: null,
-      title: '',
-      state: false,
-    });
+  const handleUpdate = (e, id) => {
+    const index = todos.findIndex((todo) => todo.id === id);
+    const todoToUpdate = todos[index];
+    todoToUpdate.title = e.target.value;
+    setEdit(false);
   };
 
-  if (edit.state) {
-    return <TodoForm edit={edit} setEdit={setEdit} onSubmit={submitUpdate} />;
-  }
+  const handleKeyDown = (e, id) => {
+    if (e.keyCode === 27) {
+      setEdit(false);
+    }
+    if (e.keyCode === 13) {
+      handleUpdate(e, id);
+    }
+  };
 
-      return (
-        <>
-          <div className="sort-button-container">
-            <div className="buttons">
-              {Object.values(filters).map(({ value, name }) => (
-                <button
-                  key={uniqid()}
-                  className={currentFilter === value ? 'sort-button-active' : 'sort-button'}
-                  type="button"
-                  onClick={() => handleSetFilter(value)}
-                >
-                  {name}
-                </button>
+   return (
+     <>
+       <div className="sort-button-container">
+         <div className="buttons">
+           {Object.values(filters).map(({ value, name }) => (
+             <button
+               key={uniqid()}
+               className={currentFilter === value ? 'sort-button-active' : 'sort-button'}
+               type="button"
+               onClick={() => handleSetFilter(value)}
+             >
+               {name}
+             </button>
             ))}
-            </div>
-            <SortByDate sortPosts={sortPosts} />
-          </div>
-          <div
-            className="todo-container"
-          >
-            {todos.length ? (
+         </div>
+         <SortByDate sortPosts={sortPosts} />
+       </div>
+       <div
+         className="todo-container"
+       >
+         {todos.length ? (
               todos.map((todo) => (
                 <div
                   key={uniqid()}
@@ -61,13 +59,24 @@ const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, compl
                     <div className="container-icon">
                       <MdDone className="icon-done" onClick={() => completeTodo(todo.id)} />
                     </div>
-                    <div
-                      onClick={() => setEdit({ id: todo.id, title: todo.title, state: true })}
-                      className="todo-text"
-                      key={todo.id}
-                    >
-                      {todo.title}
-                    </div>
+                    {edit ? (
+                      <input
+                        autoFocus
+                        type="title"
+                        placeholder="I want to..."
+                        name="title"
+                        onKeyDown={(e) => handleKeyDown(e, todo.id)}
+                        defaultValue={todo.title}
+                      />
+                    ) : (
+                      <div
+                        onClick={() => setEdit(true)}
+                        className="todo-text"
+                        key={todo.id}
+                      >
+                        {todo.title}
+                      </div>
+                    )}
                   </div>
                   <div className="right-container">
                     <div
@@ -85,11 +94,11 @@ const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, compl
             )
 
               : (<h1 className="not-add">Todo not added yet!</h1>)}
-          </div>
+       </div>
 
-        </>
+     </>
 
       );
-};
+ };
 
 export default Todo;

@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 import Pagination from './Pagination';
@@ -90,19 +90,8 @@ const TodoList = () => {
     const lastIndex = currentPage * postsPerPage;
     const firstIndex = lastIndex - postsPerPage;
     const todosToPage = filteredTodos.slice(firstIndex, lastIndex);
-    if (todosToPage.length > postsPerPage) {
-      setCurrentPage(currentPage - 1);
-    }
     return todosToPage;
   }, [currentPage, todos, selectedSort, currentFilter]);
-
-  const updateTodo = (todoId, newValue) => {
-    if (!newValue.text) {
-      return;
-    }
-
-    setTodos((prev) => prev.map((item) => (item.id === todoId ? newValue : item)));
-  };
 
   return (
     <div className="todo-container">
@@ -116,10 +105,9 @@ const TodoList = () => {
         todos={currentPosts}
         completeTodo={completeTodo}
         removeTodo={removeTodo}
-        updateTodo={updateTodo}
         selectedSort={selectedSort}
       />
-      <Pagination setCurrentPage={setCurrentPage} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
+      <Pagination setCurrentPage={handlePageChange} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
     </div>
   );
 };

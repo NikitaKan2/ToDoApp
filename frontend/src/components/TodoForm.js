@@ -1,9 +1,9 @@
 import React, {
-  useState, useEffect, useRef, useCallback,
+  useState, useEffect, useRef,
 } from 'react';
 import uniqid from 'uniqid';
 
-const TodoForm = ({ onSubmit, edit, setEdit }) => {
+const TodoForm = ({ onSubmit, edit }) => {
   const [input, setInput] = useState(edit ? edit.title : '');
 
   const inputRef = useRef(null);
@@ -31,54 +31,18 @@ const TodoForm = ({ onSubmit, edit, setEdit }) => {
     setInput('');
   };
 
-  const escFunction = useCallback((event) => {
-    if (event.keyCode === 27) {
-      setEdit({
-        id: null,
-        title: '',
-        state: false,
-      });
-    }
-  }, [setEdit]);
-
-  useEffect(() => {
-    const inputEl = inputRef.current;
-    inputEl.addEventListener('keydown', escFunction);
-
-    return () => {
-      inputEl.removeEventListener('keydown', escFunction);
-    };
-  }, [escFunction]);
-
   return (
     <form className="task-form" onSubmit={handleSubmit}>
-      {edit ? (
-        <>
-          <input
-            type="title"
-            placeholder="I want to..."
-            value={input}
-            name="title"
-            className="task-input"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <button className="form-button" type="submit">Update Todo</button>
-        </>
-      ) : (
-        <>
-          <input
-            type="title"
-            placeholder="I want to..."
-            value={input}
-            name="title"
-            className="task-input"
-            onChange={handleChange}
-            ref={inputRef}
-          />
-          <button className="form-button" type="submit">Add todo</button>
-        </>
-      )}
+      <input
+        type="title"
+        placeholder="I want to..."
+        value={input}
+        name="title"
+        className="task-input"
+        onChange={handleChange}
+        ref={inputRef}
+      />
+      <button className="form-button" type="submit">Add todo</button>
     </form>
   );
 };
