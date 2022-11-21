@@ -93,6 +93,12 @@ const TodoList = () => {
     return todosToPage;
   }, [currentPage, todos, selectedSort, currentFilter]);
 
+  useEffect(() => {
+    if (currentPosts.length === 0 && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentPosts]);
+
   return (
     <div className="todo-container">
       <h1 className="todo-list-header">TodoList</h1>

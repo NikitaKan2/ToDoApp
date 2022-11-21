@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-autofocus */
 /* eslint-disable indent */
 /* eslint-disable max-len */
 /* eslint-disable object-curly-newline */
@@ -11,21 +12,22 @@ import uniqid from 'uniqid';
 import SortByDate from './SortByData';
 
 const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, completeTodo, removeTodo }) => {
-  const [edit, setEdit] = useState(false);
+    const [todoEditing, setTodoEditing] = useState(null);
+    const [editingText, setEditingText] = useState('');
 
-  const handleUpdate = (e, id) => {
-    const index = todos.findIndex((todo) => todo.id === id);
-    const todoToUpdate = todos[index];
-    todoToUpdate.title = e.target.value;
-    setEdit(false);
-  };
+    const editTodo = (id) => {
+      const updateTodo = todos.find((todo) => todo.id === id);
+      updateTodo.title = editingText;
+      setTodoEditing(null);
+      setEditingText('');
+    };
 
-  const handleKeyDown = (e, id) => {
+    const handleKeyDown = (e, id) => {
     if (e.keyCode === 27) {
-      setEdit(false);
+      setTodoEditing(null);
     }
     if (e.keyCode === 13) {
-      handleUpdate(e, id);
+      editTodo(id);
     }
   };
 
@@ -59,18 +61,20 @@ const Todo = ({ filters, currentFilter, handleSetFilter, sortPosts, todos, compl
                     <div className="container-icon">
                       <MdDone className="icon-done" onClick={() => completeTodo(todo.id)} />
                     </div>
-                    {edit ? (
+                    {todoEditing === todo.id ? (
                       <input
                         autoFocus
                         type="title"
+                        className="task-input-edit"
                         placeholder="I want to..."
                         name="title"
+                        onChange={(e) => setEditingText(e.target.value)}
                         onKeyDown={(e) => handleKeyDown(e, todo.id)}
-                        defaultValue={todo.title}
+                        value={editingText}
                       />
                     ) : (
                       <div
-                        onClick={() => setEdit(true)}
+                        onClick={() => setTodoEditing(todo.id)}
                         className="todo-text"
                         key={todo.id}
                       >

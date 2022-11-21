@@ -193,6 +193,13 @@ button:active {
   color: greenyellow;
 }
 
+.task-input-edit {
+  min-width: 350px;
+  padding: 12px 15px;
+  border: 1px solid white;
+  border-radius: 5px 5px 5px 5px;
+  margin-left: 10px;
+}
 
 .arrow-left {
   width: 40px;
