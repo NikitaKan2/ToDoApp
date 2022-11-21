@@ -1,10 +1,12 @@
+import axios from 'axios';
 import React, {
   useState, useEffect, useRef,
 } from 'react';
-import uniqid from 'uniqid';
 
-const TodoForm = ({ onSubmit, edit }) => {
-  const [input, setInput] = useState(edit ? edit.title : '');
+import routes from '../routes';
+
+const TodoForm = ({ onSubmit }) => {
+  const [input, setInput] = useState('');
 
   const inputRef = useRef(null);
 
@@ -17,27 +19,31 @@ const TodoForm = ({ onSubmit, edit }) => {
     setInput(value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    onSubmit({
-      id: uniqid(),
-      title: input,
-      completed: false,
-      date: new Date().toLocaleDateString('ru-RU'),
-      dateForSort: Date.now(),
-    });
-
+    try {
+      const task = {
+        name: input,
+        done: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      };
+      const response = await axios.post(routes.postTask(), task, { headers: { 'Content-Type': 'application/json' } });
+      onSubmit(response.data);
+    } catch (error) {
+      console.log(error.message);
+    }
     setInput('');
   };
 
   return (
     <form className="task-form" onSubmit={handleSubmit}>
       <input
-        type="title"
+        type="name"
         placeholder="I want to..."
         value={input}
-        name="title"
+        name="name"
         className="task-input"
         onChange={handleChange}
         ref={inputRef}
