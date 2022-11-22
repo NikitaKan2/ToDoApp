@@ -1,64 +1,50 @@
+/* eslint-disable no-alert */
 /* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useMemo, useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 import Pagination from './Pagination';
-import routes from '../routes';
+import {
+  deleteTask, fetchAllTasks, getPagesCount, patchTask,
+} from '../services';
 import Loader from '../UI/Loader/Loader';
 
 const TodoList = () => {
   const filters = {
     ALL: {
-      value: 'all',
+      value: '',
       name: 'All',
     },
     DONE: {
-      value: true,
+      value: 'done',
       name: 'Done',
     },
     UNDONE: {
-      value: false,
+      value: 'undone',
       name: 'Undone',
     },
   };
 
   const [todos, setTodos] = useState([]);
-  const [selectedSort, setSelectedSort] = useState('');
+  const [selectedSort, setSelectedSort] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [isLoading, setLoading] = useState(false);
   const [currentFilter, setCurrentFilter] = useState(filters.ALL.value);
   const postsPerPage = 5;
 
-  const getPagesCount = (totalPagesPagination) => Math.ceil(totalPagesPagination / postsPerPage);
-
-  const fetchTasks = async (pp, page) => {
+  const getTasks = async () => {
     setLoading(true);
-    const response = await axios.get(routes.getAllTasks(), {
-      params: {
-        pp,
-        page,
-      },
+    const { count, tasks } = await fetchAllTasks({
+      postsPerPage, currentPage, selectedSort, currentFilter,
     });
-    setTotalPages(getPagesCount(response.data.count));
-    if (currentPage > 1 && response.data.tasks.length === 0) {
+    setTotalPages(getPagesCount(count, postsPerPage));
+    if (currentPage > 1 && tasks.length === 0) {
       setCurrentPage(currentPage - 1);
     }
-    setTodos(response.data.tasks);
+    setTodos(tasks);
     setLoading(false);
-  };
-
-  useEffect(() => {
-    fetchTasks(postsPerPage, currentPage);
-  }, [currentPage]);
-
-  const filterTasks = (tasks) => {
-    if (currentFilter === 'all') {
-      return tasks;
-    }
-    return tasks.filter((task) => task.done === currentFilter);
   };
 
   const handlePageChange = (value) => {
@@ -69,31 +55,24 @@ const TodoList = () => {
     setCurrentFilter(value);
   };
 
-  const sortedTodo = () => {
-    if (selectedSort === 'up') {
-      return [...todos].sort((a, b) => a.createdAt.localeCompare(b.createdAt));
-    }
-    if (selectedSort === 'down') {
-      return [...todos].sort((a, b) => b.createdAt.localeCompare(a.createdAt));
-    }
-    return todos;
-  };
-
   const handleSort = (sort) => {
     setSelectedSort(sort);
   };
+
+  useEffect(() => {
+    getTasks();
+  }, [currentFilter, currentPage, selectedSort]);
 
   const addTodo = async (todo) => {
     if (!todo.name) {
       return;
     }
-    const newTodos = [...todos, todo];
-    setTodos(newTodos);
+    getTasks();
   };
 
   const removeTodo = async (uuid) => {
-    await axios.delete(routes.deleteTask(uuid));
-    fetchTasks(postsPerPage, currentPage);
+    deleteTask(uuid);
+    getTasks();
   };
 
   const completeTodo = async (todo) => {
@@ -104,29 +83,9 @@ const TodoList = () => {
       }
       return post;
     });
-    await axios.patch(routes.updateTask(uuid), todo);
+    await patchTask(todo);
     setTodos(updateTodos);
   };
-
-  const filteredTodos = useMemo(() => {
-    const sortedPosts = sortedTodo();
-    const filteredTasks = filterTasks(sortedPosts);
-    return filteredTasks;
-  }, [currentPage, todos, selectedSort, currentFilter]);
-
-  // const currentPosts = useMemo(() => {
-  //   const lastIndex = currentPage * postsPerPage;
-  //   const firstIndex = lastIndex - postsPerPage;
-  //   const todosToPage = filteredTodos.slice(firstIndex, lastIndex);
-  //   console.log(todosToPage);
-  //   return todosToPage;
-  // }, [currentPage, todos, selectedSort, currentFilter]);
-
-  // useEffect(() => {
-  //   if (currentPosts.length === 0 && currentPage > 1) {
-  //     setCurrentPage(currentPage - 1);
-  //   }
-  // }, [currentPosts]);
 
   return (
     <div className="todo-container">
@@ -139,7 +98,7 @@ const TodoList = () => {
             currentFilter={currentFilter}
             handleSetFilter={handleSetFilter}
             sortPosts={handleSort}
-            todos={filteredTodos}
+            todos={todos}
             completeTodo={completeTodo}
             removeTodo={removeTodo}
             selectedSort={selectedSort}

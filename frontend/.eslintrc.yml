@@ -19,6 +19,7 @@ plugins:
   - functional
 
 rules:
+  no-allert: off
   import/extensions: 0
   code: 0
   import/no-unresolved: 0

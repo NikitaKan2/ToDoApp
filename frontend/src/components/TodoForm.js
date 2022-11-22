@@ -1,9 +1,9 @@
-import axios from 'axios';
+/* eslint-disable no-alert */
 import React, {
   useState, useEffect, useRef,
 } from 'react';
 
-import routes from '../routes';
+import { postTask } from '../services';
 
 const TodoForm = ({ onSubmit }) => {
   const [input, setInput] = useState('');
@@ -23,16 +23,16 @@ const TodoForm = ({ onSubmit }) => {
     e.preventDefault();
 
     try {
-      const task = {
+      const oldTask = {
         name: input,
         done: false,
         createdAt: new Date().toISOString(),
         updatedAt: new Date().toISOString(),
       };
-      const response = await axios.post(routes.postTask(), task, { headers: { 'Content-Type': 'application/json' } });
-      onSubmit(response.data);
+      const newTask = await postTask(oldTask);
+      onSubmit(newTask);
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
     setInput('');
   };

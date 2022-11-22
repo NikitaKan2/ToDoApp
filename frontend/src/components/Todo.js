@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-autofocus */
@@ -5,33 +6,28 @@ import React, { useState } from 'react';
 import { AiOutlineClose } from 'react-icons/ai';
 import { MdDone } from 'react-icons/md';
 import uniqid from 'uniqid';
-import axios from 'axios';
 import SortByDate from './SortByData';
-import routes from '../routes';
+import { patchTask } from '../services';
 
 const Todo = ({
-  filters, currentFilter, handleSetFilter, sortPosts, todos, completeTodo, removeTodo,
+  filters, currentFilter, handleSetFilter, sortPosts, todos, completeTodo, removeTodo, selectedSort,
 }) => {
   const [todoEditing, setTodoEditing] = useState(null);
   const [editingText, setEditingText] = useState('');
-
-  // const editTodo = async (todo) => {
-  //   console.log(todo);
-  //   todo.name = editingText;
-  //   await axios.patch(routes.updateTask(todo.uuid), todo);
-  //   setTodoEditing(null);
-  //   setEditingText('');
-  // };
 
   const handleKeyDown = async (e, todo) => {
     if (e.keyCode === 27) {
       setTodoEditing(null);
     }
     if (e.keyCode === 13) {
-      todo.name = editingText;
-      await axios.patch(routes.updateTask(todo.uuid), todo);
-      setTodoEditing(null);
-      setEditingText('');
+      try {
+        todo.name = editingText;
+        await patchTask(todo);
+        setTodoEditing(null);
+        setEditingText('');
+      } catch (error) {
+        alert(error.message);
+      }
     }
   };
 
@@ -50,7 +46,7 @@ const Todo = ({
             </button>
           ))}
         </div>
-        <SortByDate sortPosts={sortPosts} />
+        <SortByDate sortPosts={sortPosts} selectedSort={selectedSort} />
       </div>
       <div
         className="todo-container"
