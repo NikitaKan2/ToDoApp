@@ -277,6 +277,24 @@ button:active {
   padding: 10px 15px;
 }
 
+.task-input-edit {
+  min-width: 350px;
+  padding: 12px 15px;
+  border: 1px solid white;
+  margin-left: 10px;
+  border-radius: 5px 5px 5px 5px;
+}
+
+.page-link-active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 25px;
+  border-radius: 5px;
+  background-color: rgb(81, 188, 114);
+  cursor: pointer;
+}
+
 .todo-date {
   padding-right: 5px;
   word-break: keep-all;

@@ -57,12 +57,14 @@ const TodoList = () => {
   };
 
   const addTodo = (todo) => {
-    if (!todo.title) {
+    const repeatedTodo = todos.filter((task) => task.title === todo.title);
+    if (repeatedTodo.length !== 0) {
       return;
     }
-
-    const newTodos = [todo, ...todos];
-    setTodos(newTodos);
+    if (todo.title && todo.title.split(' ').join('')) {
+      const newTodos = [todo, ...todos];
+      setTodos(newTodos);
+    }
   };
 
   const removeTodo = (id) => {
@@ -93,6 +95,12 @@ const TodoList = () => {
     return todosToPage;
   }, [currentPage, todos, selectedSort, currentFilter]);
 
+  useEffect(() => {
+    if (currentPosts.length === 0 && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }, [currentPosts]);
+
   return (
     <div className="todo-container">
       <h1 className="todo-list-header">TodoList</h1>
@@ -107,7 +115,7 @@ const TodoList = () => {
         removeTodo={removeTodo}
         selectedSort={selectedSort}
       />
-      <Pagination currentPage={currentPage} setCurrentPage={handlePageChange} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
+      <Pagination currentPage={currentPage} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
     </div>
   );
 };

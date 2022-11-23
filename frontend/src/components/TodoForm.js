@@ -3,8 +3,8 @@ import React, {
 } from 'react';
 import uniqid from 'uniqid';
 
-const TodoForm = ({ onSubmit, edit }) => {
-  const [input, setInput] = useState(edit ? edit.title : '');
+const TodoForm = ({ onSubmit }) => {
+  const [input, setInput] = useState('');
 
   const inputRef = useRef(null);
 
