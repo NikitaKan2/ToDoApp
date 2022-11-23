@@ -291,6 +291,14 @@ button:active {
   margin-right: 10px;
 }
 
+.button-none {
+  display: none;
+}
+
+.arrow-none {
+  display: none;
+}
+
 .container-icon {
   display: flex;
   align-items: center;
@@ -299,6 +307,10 @@ button:active {
   height: 65px;
   border-radius: 5px 0px 0px 5px;
   background-color: greenyellow;
+}
+
+.pagination-none {
+  display: none;
 }
 
 @media (min-width: 320px) and (max-width: 502px) {

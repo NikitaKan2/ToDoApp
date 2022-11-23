@@ -107,7 +107,7 @@ const TodoList = () => {
         removeTodo={removeTodo}
         selectedSort={selectedSort}
       />
-      <Pagination setCurrentPage={handlePageChange} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
+      <Pagination currentPage={currentPage} setCurrentPage={handlePageChange} postsPerPage={postsPerPage} totalPosts={filteredTodos.length} paginate={handlePageChange} />
     </div>
   );
 };
