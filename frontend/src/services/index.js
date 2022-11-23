@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 const userId = process.env.REACT_APP_USER_ID;
+const baseURL = process.env.REACT_APP_BASE_URL;
 
-const tasksClient = axios.create({
-  baseURL: 'https://todo-api-learning.herokuapp.com/v1/',
+export const tasksClient = axios.create({
+  baseURL,
   headers: { 'Content-Type': 'application/json' },
 });
 
@@ -36,9 +37,3 @@ export const postTask = async (todo) => {
   const { data } = await tasksClient.post(`task/${userId}/`, todo);
   return data;
 };
-
-tasksClient.interceptors.request.use((request) => {
-  console.log(request);
-}, (error) => {
-  console.log(error);
-});

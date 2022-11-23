@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 /* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
@@ -71,8 +70,8 @@ const TodoList = () => {
   };
 
   const removeTodo = async (uuid) => {
-    deleteTask(uuid);
-    getTasks();
+    await deleteTask(uuid);
+    await getTasks();
   };
 
   const completeTodo = async (todo) => {

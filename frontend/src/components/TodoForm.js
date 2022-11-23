@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import React, {
   useState, useEffect, useRef,
 } from 'react';
@@ -22,18 +21,14 @@ const TodoForm = ({ onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const oldTask = {
-        name: input,
-        done: false,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      const newTask = await postTask(oldTask);
-      onSubmit(newTask);
-    } catch (error) {
-      alert(error.message);
-    }
+    const oldTask = {
+      name: input,
+      done: false,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+    const newTask = await postTask(oldTask);
+    onSubmit(newTask);
     setInput('');
   };
 

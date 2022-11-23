@@ -14,8 +14,10 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
     return numbresForPage;
   }, [totalPages]);
 
+  const className = totalPages > 1 ? 'pagination' : 'pagination-none';
+
   return (
-    <ul className="pagination">
+    <ul className={className}>
       <button type="button" className={currentPage === 1 ? 'arrow-none' : 'button-to-left'}>
         <AiOutlineDoubleLeft className="arrow-left" onClick={() => paginate(pageNumbers[0])} />
       </button>

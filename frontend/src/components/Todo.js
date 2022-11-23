@@ -20,14 +20,10 @@ const Todo = ({
       setTodoEditing(null);
     }
     if (e.keyCode === 13) {
-      try {
-        todo.name = editingText;
-        await patchTask(todo);
-        setTodoEditing(null);
-        setEditingText('');
-      } catch (error) {
-        alert(error.message);
-      }
+      todo.name = editingText;
+      await patchTask(todo);
+      setTodoEditing(null);
+      setEditingText('');
     }
   };
 

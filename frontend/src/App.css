@@ -277,6 +277,7 @@ button:active {
   justify-content: center;
 }
 
+
 .modal {
   position: fixed;
   top: 0;
@@ -390,6 +391,10 @@ button:active {
   align-items: center;
   justify-content: center;
 }
+
+.pagination-none {
+  display: none;
+} 
 
 .page-item {
   display: flex;
