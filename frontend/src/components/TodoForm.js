@@ -1,49 +1,46 @@
-import React, {
-  useState, useEffect, useRef,
-} from 'react';
-
+/* eslint-disable react/jsx-props-no-spreading */
+import React from 'react';
+import { Button, Input } from '@chakra-ui/react';
+import { useForm } from 'react-hook-form';
 import { postTask } from '../services';
 
-const TodoForm = ({ onSubmit }) => {
-  const [input, setInput] = useState('');
+const TodoForm = ({ isLoading, addTodo }) => {
+  const { register, handleSubmit, reset } = useForm();
 
-  const inputRef = useRef(null);
-
-  useEffect(() => {
-    inputRef.current.focus();
-  });
-
-  const handleChange = (e) => {
-    const { value } = e.target;
-    setInput(value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const onSubmit = async (values) => {
     const oldTask = {
-      name: input,
+      name: values.name,
       done: false,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
     const newTask = await postTask(oldTask);
-    onSubmit(newTask);
-    setInput('');
+    addTodo(newTask);
+    reset();
   };
 
   return (
-    <form className="task-form" onSubmit={handleSubmit}>
-      <input
-        type="name"
-        placeholder="I want to..."
-        value={input}
-        name="name"
-        className="task-input"
-        onChange={handleChange}
-        ref={inputRef}
+    <form onSubmit={handleSubmit(onSubmit)} className="task-form">
+      <Input
+        borderColor="black"
+        background="gray.100"
+        color="teal"
+        marginRight="5px"
+        focusBorderColor="teal.400"
+        placeholder="Add todo..."
+        defaultValue=""
+        {...register('name', { required: true })}
+        _placeholder={{ opacity: 0.5, color: 'black' }}
+        autoFocus
       />
-      <button className="form-button" type="submit">Add todo</button>
+      <Button
+        colorScheme="teal"
+        variant="solid"
+        type="submit"
+        isLoading={isLoading}
+      >
+        Add Todo
+      </Button>
     </form>
   );
 };

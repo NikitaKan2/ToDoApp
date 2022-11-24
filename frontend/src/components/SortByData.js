@@ -1,12 +1,13 @@
 import React from 'react';
-import { AiOutlineArrowUp, AiOutlineArrowDown } from 'react-icons/ai';
+import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
+import { Box, Text } from '@chakra-ui/react';
 
 const SortByDate = ({ sortPosts, selectedSort }) => (
-  <div className="conteiner-sort-arrows">
-    <span className="text-sort">Sort By Data</span>
-    <AiOutlineArrowUp onClick={() => sortPosts('asc')} className={selectedSort === 'asc' ? 'arrow-up-active' : 'arrow-up'} />
-    <AiOutlineArrowDown onClick={() => sortPosts('desc')} className={selectedSort === 'desc' ? 'arrow-down-active' : 'arrow-down'} />
-  </div>
+  <Box className="container-sort-arrows" backgroundColor="teal.500">
+    <Text className="text-sort">Sort By Date</Text>
+    <ArrowUpIcon w={5} h={5} focusable onClick={() => sortPosts('asc')} className={selectedSort === 'asc' ? 'arrow-up-active' : 'arrow-up'} />
+    <ArrowDownIcon w={5} h={5} focusable onClick={() => sortPosts('desc')} className={selectedSort === 'desc' ? 'arrow-down-active' : 'arrow-down'} />
+  </Box>
 );
 
 export default SortByDate;

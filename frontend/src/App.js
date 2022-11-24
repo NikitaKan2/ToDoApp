@@ -1,5 +1,6 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { ChakraProvider } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import TodoList from './components/TodoList';
@@ -10,7 +11,8 @@ tasksClient.interceptors.response.use((response) => {
   return response;
 }, (error) => {
   const notify = () => {
-    toast.error(`${error.message}`, {
+    console.log(error);
+    toast.error(`${error.response.data.message}`, {
       position: 'top-center',
       autoClose: 5000,
       hideProgressBar: false,
@@ -25,7 +27,7 @@ tasksClient.interceptors.response.use((response) => {
 });
 
 const App = () => (
-  <div className="App">
+  <ChakraProvider>
     <TodoList />
     <ToastContainer
       position="top-center"
@@ -39,7 +41,7 @@ const App = () => (
       pauseOnHover
       theme="dark"
     />
-  </div>
+  </ChakraProvider>
 );
 
 export default App;

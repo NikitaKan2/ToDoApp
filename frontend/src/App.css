@@ -1,16 +1,5 @@
-.App {
-  max-width: 1500px;
-  margin: 0 auto;
-  padding: 70px 0;
-  min-height: 100vh;
-  text-align: center;
-  background-color: #333;
-  box-shadow: 2px 1px 62px 13px rgba(34, 60, 80, 0.25);
-}
-
 .todo-list-header {
   font-size: 40px;
-  color: white;
 }
 
 .todo {
@@ -30,6 +19,8 @@ button:active {
 }
 
 .task-form {
+  display: flex;
+  justify-content: space-between;
   margin-bottom: 15px;
 }
 
@@ -55,7 +46,7 @@ button:active {
   margin-bottom: 15px;
   min-height: 65px;
   border-radius: 4px 4px 4px 4px;
-  background-color: #555;
+  /* background-color: #555; */
   color: #e8e8e8;
 }
 
@@ -98,12 +89,14 @@ button:active {
 
 .icons {
   display: flex;
-  padding-left: 10px;
-  background-color: red;
-  width: 45px;
-  height: 65px;
-  align-items: center;
-  border-radius: 0px 5px 5px 0px;
+    align-items: center;
+    justify-content: center;
+    min-height: 65px;
+    min-width: 45px;
+    flex: 1 1 auto;
+    align-self: stretch;
+    border-radius: 0px 5px 5px 0px;
+    background-color: red;
 }
 
 .todo-container {
@@ -112,7 +105,8 @@ button:active {
   margin: 0 auto;
   flex-direction: column;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
+    
 }
 
 .icon-edit {
@@ -164,16 +158,6 @@ button:active {
   margin-bottom: 15px;  
 }
 
-.conteiner-sort-arrows {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-radius: 5px;
-  padding: 11px 8px;
-  color: white;
-  background-color: rgb(28, 82, 44);
-}
-
 .sort-button:not(:last-child) {
   margin-right: 10px;
 }
@@ -186,11 +170,15 @@ button:active {
 }
 
 .arrow-up-active {
+  margin-right: 10px;
+}
+
+.arrow-up-active path {
   width: 20px;
   height: 20px;
   margin-right: 10px;
   cursor: pointer;
-  color: greenyellow;
+  fill: greenyellow;
 }
 
 .task-input-edit {
@@ -204,12 +192,6 @@ button:active {
 .arrow-left {
   width: 40px;
   height: 40px;
-  margin-right: 25px;
-}
-
-.arrow-left:hover,
-.arrow-right:hover {
-  color: greenyellow;
 }
 
 .arrow-right {
@@ -219,7 +201,7 @@ button:active {
 
 
 
-.arrow-down-active {
+.arrow-down-active path {
   width: 20px;
   height: 20px;
   cursor: pointer;
@@ -335,6 +317,16 @@ button:active {
   margin: -1rem -1rem -1rem auto;
 }
 
+.container {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 70px 0;
+    min-height: 100vh;
+    text-align: center;
+    background-color: rgb(245, 242, 242);
+    box-shadow: 2px 1px 62px 13px rgba(34, 60, 80, 0.25);
+}
+
 .modal-body {
   overflow: auto;
 }
@@ -382,7 +374,23 @@ button:active {
 
 .right-container {
   display: flex;
+  align-self: stretch;
   align-items: center;
+}
+
+.container-sort-arrows {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 5px;
+  padding: 11px 8px;
+  color: white;
+  max-height: 40px;
+  background-color: rgb(28, 82, 44)
+}
+
+.button-to-left {
+  margin-right: 15px;
 }
 
 .pagination {
@@ -424,16 +432,6 @@ button:active {
   margin-right: 10px;
 }
 
-.container-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 45px;
-  height: 65px;
-  border-radius: 5px 0px 0px 5px;
-  background-color: greenyellow;
-}
-
 @media (min-width: 320px) and (max-width: 502px) {
 
   .form-button {
@@ -451,11 +449,6 @@ button:active {
     margin-bottom: 10px;
   }
 
-  .conteiner-sort-arrows {
-    background-color: rgb(28, 82, 44);
-    margin-bottom: 15px;
-  }
-
   .todo-container {
     margin: 0 auto;
     max-width: 390px;
@@ -471,6 +464,26 @@ button:active {
     min-width: 100px;
     max-width: none;
     width: 360px;
+  }
+
+ }
+
+ @media (min-width: 503px) and (max-width: 652px) {
+  .todo {
+    min-width: 100px;
+    max-width: none;
+    width: 460px;
+  }
+
+  .todo-complete {
+    min-width: 100px;
+    max-width: none;
+    width: 460px;
+  }
+
+  .pagination {
+    display: flex;
+    flex: 1 1 25%;
   }
 
  }

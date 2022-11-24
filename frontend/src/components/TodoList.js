@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
+import { Box, Text } from '@chakra-ui/react';
 import Todo from './Todo';
 import TodoForm from './TodoForm';
 import Pagination from './Pagination';
@@ -8,6 +9,7 @@ import {
   deleteTask, fetchAllTasks, getPagesCount, patchTask,
 } from '../services';
 import Loader from '../UI/Loader/Loader';
+import SortButtons from './SortButtons';
 
 const TodoList = () => {
   const filters = {
@@ -26,6 +28,7 @@ const TodoList = () => {
   };
 
   const [todos, setTodos] = useState([]);
+  const [buttonDisabled, setDisabled] = useState(false);
   const [selectedSort, setSelectedSort] = useState('desc');
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
@@ -70,11 +73,14 @@ const TodoList = () => {
   };
 
   const removeTodo = async (uuid) => {
+    setDisabled(true);
     await deleteTask(uuid);
     await getTasks();
+    setDisabled(false);
   };
 
   const completeTodo = async (todo) => {
+    setDisabled(true);
     const { uuid } = todo;
     const updateTodos = todos.map((post) => {
       if (post.uuid === uuid) {
@@ -84,27 +90,33 @@ const TodoList = () => {
     });
     await patchTask(todo);
     setTodos(updateTodos);
+    setDisabled(false);
   };
 
   return (
-    <div className="todo-container">
-      <h1 className="todo-list-header">TodoList</h1>
-      <TodoForm onSubmit={addTodo} />
-      {isLoading ? <Loader />
-        : (
-          <Todo
-            filters={filters}
-            currentFilter={currentFilter}
-            handleSetFilter={handleSetFilter}
-            sortPosts={handleSort}
-            todos={todos}
-            completeTodo={completeTodo}
-            removeTodo={removeTodo}
-            selectedSort={selectedSort}
-          />
-        )}
-      <Pagination currentPage={currentPage} totalPages={totalPages} paginate={handlePageChange} />
-    </div>
+    <Box className="container">
+      <Box className="todo-container">
+        <Text className="todo-list-header" color="gray.500">TodoList</Text>
+        <TodoForm isLoading={isLoading} addTodo={addTodo} />
+        <SortButtons
+          sortPosts={handleSort}
+          selectedSort={selectedSort}
+          currentFilter={currentFilter}
+          handleSetFilter={handleSetFilter}
+        />
+        {isLoading ? <Loader /> : null}
+        <Todo
+          buttonDisabled={buttonDisabled}
+          filters={filters}
+          sortPosts={handleSort}
+          todos={todos}
+          completeTodo={completeTodo}
+          removeTodo={removeTodo}
+          selectedSort={selectedSort}
+        />
+        <Pagination currentPage={currentPage} totalPages={totalPages} paginate={handlePageChange} />
+      </Box>
+    </Box>
   );
 };
 

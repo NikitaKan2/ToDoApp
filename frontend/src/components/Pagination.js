@@ -2,6 +2,11 @@
 /* eslint-disable functional/no-let */
 /* eslint-disable functional/no-loop-statement */
 import React, { useMemo } from 'react';
+import {
+  Button,
+  List,
+  ListItem,
+} from '@chakra-ui/react';
 import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from 'react-icons/ai';
 
 const Pagination = ({ currentPage, totalPages, paginate }) => {
@@ -17,21 +22,29 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
   const className = totalPages > 1 ? 'pagination' : 'pagination-none';
 
   return (
-    <ul className={className}>
-      <button type="button" className={currentPage === 1 ? 'arrow-none' : 'button-to-left'}>
-        <AiOutlineDoubleLeft className="arrow-left" onClick={() => paginate(pageNumbers[0])} />
-      </button>
+    <List className={className}>
+      {currentPage === 1
+        ? null
+        : (
+          <Button colorScheme="teal" type="button" className="button-to-left">
+            <AiOutlineDoubleLeft className="arrow-left" onClick={() => paginate(pageNumbers[0])} />
+          </Button>
+        )}
       {pageNumbers.map((number) => (
-        <li key={number} className={currentPage === number ? 'page-item-active' : 'page-item'}>
-          <button type="button" onClick={() => paginate(number)} className="page-link">
+        <ListItem key={number} className="page-item">
+          <Button colorScheme="teal" isActive={currentPage === number} type="button" onClick={() => paginate(number)} className="page-link">
             {number}
-          </button>
-        </li>
+          </Button>
+        </ListItem>
       ))}
-      <button type="button" className={currentPage === pageNumbers[pageNumbers.length - 1] ? 'arrow-none' : 'button-to-right'}>
-        <AiOutlineDoubleRight className="arrow-right" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} />
-      </button>
-    </ul>
+      {currentPage === pageNumbers[pageNumbers.length - 1]
+        ? null
+        : (
+          <Button colorScheme="teal" type="button" className="button-to-right">
+            <AiOutlineDoubleRight className="arrow-right" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} />
+          </Button>
+        )}
+    </List>
   );
 };
 

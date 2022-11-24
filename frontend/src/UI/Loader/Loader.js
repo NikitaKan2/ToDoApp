@@ -1,9 +1,8 @@
 import React from 'react';
+import { CircularProgress } from '@chakra-ui/react';
 
 const Loader = () => (
-  <div className="loader-container">
-    <div className="loader" />
-  </div>
+  <CircularProgress isIndeterminate color="green.300" size="120px" />
 );
 
 export default Loader;
