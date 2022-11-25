@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, ButtonGroup, Button } from '@chakra-ui/react';
 import uniqid from 'uniqid';
-import SortByDate from './SortByData';
+import SortByDate from './SortByDate';
 
 const SortButtons = ({
   sortPosts, selectedSort, currentFilter, handleSetFilter,
@@ -25,8 +25,14 @@ const SortButtons = ({
       <ButtonGroup spacing={3} direction="row" align="center" justifyContent="center">
         {Object.values(filters).map(({ value, name }) => (
           <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
             key={uniqid()}
-            colorScheme="teal"
+            background="#0096c7"
             variant="solid"
             isActive={currentFilter === value}
             className="sort-button"

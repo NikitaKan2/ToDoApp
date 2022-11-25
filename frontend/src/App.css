@@ -2,15 +2,6 @@
   font-size: 40px;
 }
 
-.todo {
-  min-height: 100px;
-  min-width: 700px;
-}
-
-button:active {
-  background-color: rgb(57, 143, 83);
-}
-
 .task-input {
   min-width: 350px;
   padding: 12px 15px;
@@ -36,6 +27,22 @@ button:active {
   background-color: rgb(40, 122, 64);
 }
 
+.todo-complete {
+  background-color: grey;
+}
+
+.complete-icon:hover {
+  width: 30px;
+  height: 30px;
+  transition: all .5s;
+}
+
+.delete-icon:hover {
+  width: 25px;
+  height: 25px;
+  transition: all .5s;
+}
+
 .todo {
   display: flex;
   flex-grow: 1;
@@ -43,10 +50,8 @@ button:active {
   min-width: 650px;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 15px;
   min-height: 65px;
   border-radius: 4px 4px 4px 4px;
-  /* background-color: #555; */
   color: #e8e8e8;
 }
 
@@ -68,20 +73,6 @@ button:active {
   cursor: pointer;
 }
 
-.todo-complete {
-  display: flex;
-  flex-grow: 1;
-  word-break: break-all;
-  min-width: 650px;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 15px;
-  min-height: 65px;
-  border-radius: 4px 4px 4px 4px;
-  background-color: black;
-  text-decoration: line-through;
-}
-
 .not-add {
   font-size: 30px;
   margin-top: 50px;
@@ -99,14 +90,18 @@ button:active {
     background-color: red;
 }
 
+.loading {
+  position: fixed;
+  z-index: 100312321;
+}
+
 .todo-container {
   display: flex;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-    
 }
 
 .icon-edit {
@@ -143,11 +138,6 @@ button:active {
   background-color: rgb(28, 82, 44);
   padding: 11px 8px;
   border-radius: 5px 5px 5px 5px;
-}
-
-.sort-button:hover {
-  transition: all .2s;
-  background-color: rgb(40, 122, 64);
 }
 
 .sort-button-container {
@@ -234,31 +224,6 @@ button:active {
   padding-right: 15px;
   padding-left: 10px;
 }
-
-@keyframes loader-spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-.loader {
-  display: inline-block;
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-left-color: black;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  animation: loader-spin 1.2s linear infinite;
-}
-
-.loader-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 
 .modal {
   position: fixed;
@@ -460,22 +425,10 @@ button:active {
     width: 360px;
   }
 
-  .todo-complete {
-    min-width: 100px;
-    max-width: none;
-    width: 360px;
-  }
-
  }
 
  @media (min-width: 503px) and (max-width: 652px) {
   .todo {
-    min-width: 100px;
-    max-width: none;
-    width: 460px;
-  }
-
-  .todo-complete {
     min-width: 100px;
     max-width: none;
     width: 460px;

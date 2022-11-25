@@ -6,25 +6,24 @@ import './App.css';
 import TodoList from './components/TodoList';
 import { tasksClient } from './services';
 
-tasksClient.interceptors.response.use((response) => {
-  console.log(response);
-  return response;
-}, (error) => {
-  const notify = () => {
-    console.log(error);
-    toast.error(`${error.response.data.message}`, {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: 'dark',
-    });
-  };
-  notify();
-});
+tasksClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const notify = () => {
+      toast.error(`${error.response.data.message}`, {
+        position: 'top-center',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+    };
+    notify();
+  },
+);
 
 const App = () => (
   <ChakraProvider>

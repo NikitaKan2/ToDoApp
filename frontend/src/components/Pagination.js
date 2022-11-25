@@ -26,13 +26,37 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
       {currentPage === 1
         ? null
         : (
-          <Button colorScheme="teal" type="button" className="button-to-left">
-            <AiOutlineDoubleLeft className="arrow-left" onClick={() => paginate(pageNumbers[0])} />
+          <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
+            background="#0096c7"
+            type="button"
+            onClick={() => paginate(pageNumbers[0])}
+            className="button-to-left"
+          >
+            <AiOutlineDoubleLeft className="arrow-left" />
           </Button>
         )}
       {pageNumbers.map((number) => (
         <ListItem key={number} className="page-item">
-          <Button colorScheme="teal" isActive={currentPage === number} type="button" onClick={() => paginate(number)} className="page-link">
+          <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
+            isActive={currentPage === number}
+            background="#0096c7"
+            type="button"
+            color="white"
+            onClick={() => paginate(number)}
+            className="page-link"
+          >
             {number}
           </Button>
         </ListItem>
@@ -40,8 +64,19 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
       {currentPage === pageNumbers[pageNumbers.length - 1]
         ? null
         : (
-          <Button colorScheme="teal" type="button" className="button-to-right">
-            <AiOutlineDoubleRight className="arrow-right" onClick={() => paginate(pageNumbers[pageNumbers.length - 1])} />
+          <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
+            background="#0096c7"
+            type="button"
+            onClick={() => paginate(pageNumbers[pageNumbers.length - 1])}
+            className="button-to-right"
+          >
+            <AiOutlineDoubleRight className="arrow-right" color="white" />
           </Button>
         )}
     </List>

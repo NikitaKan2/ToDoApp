@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState } from 'react';
 import {
-  Box, Button, Input, Text,
+  Box, Button, Input, Text, Stack,
 } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import uniqid from 'uniqid';
@@ -30,35 +30,44 @@ const Todo = ({
   };
 
   return (
-    <Box
-      className="todo-container"
+    <Stack
+      mb="15px"
+      direction="column"
+      spacing={4}
+      width="100%"
     >
       {todos.length ? (
         todos.map((todo) => (
           <Box
-            _hover={{
-              background: '#48cae4',
-            }}
-            background="#023e8a"
+            alignItems="center"
+            justifyContent="space-between"
+            background={todo.done ? 'grey' : 'rgb(242, 242, 242)'}
+            textDecoration={todo.done ? 'line-through' : ''}
+            display="flex"
+            w="100%"
+            p={4}
+            borderRadius={15}
+            boxShadow="4px 4px 18px 9px rgba(0, 144, 255, 0.2);"
             key={uniqid()}
-            className={todo.done ? 'todo-complete' : 'todo'}
           >
-            <Box className="left-container">
-              <Box className="container-icon">
+            <Box
+              display="flex"
+              alignItems="center"
+            >
+              <Box>
                 <Button
-                  height="100%"
-                  _hover={{
-                    background: '#03045e',
+                  _active={{
+                    background: 'inherit',
                   }}
-                  background="teal"
+                  _hover={{
+                    background: 'inherit',
+                  }}
+                  backgroundColor="inherit"
+                  leftIcon={<CheckIcon w={5} h={5} color={todo.done ? 'blackAlpha.300' : '#80ed99'} className="complete-icon" />}
                   isDisabled={buttonDisabled}
-                  onClick={() => completeTodo(todo)}
                   alignSelf="stretch"
-                  borderRadius="5px 0px 0px 5px"
-                  minHeight="65px"
-                >
-                  <CheckIcon color="#80ed99" />
-                </Button>
+                  onClick={() => completeTodo(todo)}
+                />
               </Box>
               {todoEditing === todo.uuid ? (
                 <Input
@@ -77,6 +86,8 @@ const Todo = ({
                   onClick={() => setTodoEditing(todo.uuid)}
                   className="todo-text"
                   key={todo.uuid}
+                  maxWidth="100%"
+                  wordBreak="break-all"
                 >
                   {todo.name}
                 </Box>
@@ -89,20 +100,22 @@ const Todo = ({
               >
                 {todo.createdAt.replaceAll('-', '/').slice(0, 10)}
               </Box>
-              <Box alignSelf="stretch">
+              <Box>
                 <Button
-                  _hover={{
-                    background: '#03045e',
+                  _active={{
+                    background: 'inherit',
                   }}
-                  background="#0077b6"
+                  _hover={{
+                    background: 'inherit',
+                  }}
+                  backgroundColor="inherit"
+                  rightIcon={<CloseIcon color="red" className="delete-icon" />}
                   isDisabled={buttonDisabled}
                   onClick={() => removeTodo(todo.uuid)}
                   alignSelf="stretch"
                   borderRadius="0px 5px 5px 0px"
                   minHeight="65px"
-                >
-                  <CloseIcon color="red" />
-                </Button>
+                />
               </Box>
             </Box>
           </Box>
@@ -110,7 +123,7 @@ const Todo = ({
       )
 
         : (<Text color="gray.500" fontSize="40px">Todo not added yet!</Text>)}
-    </Box>
+    </Stack>
 
   );
 };

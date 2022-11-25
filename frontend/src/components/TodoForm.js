@@ -34,9 +34,13 @@ const TodoForm = ({ isLoading, addTodo }) => {
         autoFocus
       />
       <Button
-        colorScheme="teal"
+        _hover={{
+          background: '#0077b6',
+        }}
+        background="#0096c7"
         variant="solid"
         type="submit"
+        color="white"
         isLoading={isLoading}
       >
         Add Todo
