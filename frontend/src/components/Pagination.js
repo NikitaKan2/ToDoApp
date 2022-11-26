@@ -7,7 +7,7 @@ import {
   List,
   ListItem,
 } from '@chakra-ui/react';
-import { AiOutlineDoubleRight, AiOutlineDoubleLeft } from 'react-icons/ai';
+import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 
 const Pagination = ({ currentPage, totalPages, paginate }) => {
   const pageNumbers = useMemo(() => {
@@ -37,9 +37,8 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             type="button"
             onClick={() => paginate(pageNumbers[0])}
             className="button-to-left"
-          >
-            <AiOutlineDoubleLeft className="arrow-left" />
-          </Button>
+            leftIcon={<ArrowLeftIcon color="white" w={5} h={5} />}
+          />
         )}
       {pageNumbers.map((number) => (
         <ListItem key={number} className="page-item">
@@ -75,9 +74,8 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             type="button"
             onClick={() => paginate(pageNumbers[pageNumbers.length - 1])}
             className="button-to-right"
-          >
-            <AiOutlineDoubleRight className="arrow-right" color="white" />
-          </Button>
+            rightIcon={<ArrowRightIcon color="white" w={5} h={5} />}
+          />
         )}
     </List>
   );

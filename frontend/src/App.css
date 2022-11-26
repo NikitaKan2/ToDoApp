@@ -159,10 +159,6 @@
   cursor: pointer;
 }
 
-.arrow-up-active {
-  margin-right: 10px;
-}
-
 .arrow-up-active path {
   width: 20px;
   height: 20px;
