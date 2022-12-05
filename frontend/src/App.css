@@ -95,14 +95,6 @@
   z-index: 100312321;
 }
 
-.todo-container {
-  display: flex;
-  max-width: 600px;
-  margin: 0 auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
 
 .icon-edit {
   margin-right: 10px;

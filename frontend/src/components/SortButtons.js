@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, ButtonGroup, Button } from '@chakra-ui/react';
+import { ButtonGroup, Button, Flex } from '@chakra-ui/react';
 import uniqid from 'uniqid';
 import SortByDate from './SortByDate';
 
@@ -21,7 +21,7 @@ const SortButtons = ({
     },
   };
   return (
-    <Box className="sort-button-container">
+    <Flex justify="space-between" align="center" minW="450px" mb="15px">
       <ButtonGroup spacing={3} direction="row" align="center" justifyContent="center">
         {Object.values(filters).map(({ value, name }) => (
           <Button
@@ -35,8 +35,8 @@ const SortButtons = ({
             background="#0096c7"
             variant="solid"
             isActive={currentFilter === value}
-            className="sort-button"
             type="button"
+            color="white"
             onClick={() => handleSetFilter(value)}
           >
             {name}
@@ -44,7 +44,7 @@ const SortButtons = ({
         ))}
         <SortByDate sortPosts={sortPosts} selectedSort={selectedSort} />
       </ButtonGroup>
-    </Box>
+    </Flex>
   );
 };
 

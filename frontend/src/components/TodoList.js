@@ -76,10 +76,24 @@ const TodoList = () => {
   };
 
   return (
-    <Box className="container">
-      <Box className="todo-container">
-        <Text className="todo-list-header" color="gray.500">TodoList</Text>
-        <TodoForm isLoading={isLoading} addTodo={addTodo} />
+    <Box
+      maxW="1500px"
+      margin="0 auto"
+      minH="100vh"
+      textAlign="center"
+      backgroundColor="rgb(245, 242, 242)"
+      boxShadow="2px 1px 62px 13px rgba(34, 60, 80, 0.25)"
+    >
+      <Box
+        display="flex"
+        margin="0 auto"
+        flexDirection="column"
+        alignItems="center"
+        justifyContent="center"
+        maxWidth="600px"
+      >
+        <Text as="h1" fontSize={40} color="gray.500">TodoList</Text>
+        <TodoForm addTodo={addTodo} />
         <SortButtons
           sortPosts={handleSetSort}
           selectedSort={selectedSort}

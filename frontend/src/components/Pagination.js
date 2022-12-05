@@ -1,7 +1,7 @@
 /* eslint-disable object-curly-newline */
 /* eslint-disable functional/no-let */
 /* eslint-disable functional/no-loop-statement */
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Button,
   List,
@@ -10,6 +10,8 @@ import {
 import { ArrowLeftIcon, ArrowRightIcon } from '@chakra-ui/icons';
 
 const Pagination = ({ currentPage, totalPages, paginate }) => {
+  const [currentPages, setCurrentPages] = useState([]);
+
   const pageNumbers = useMemo(() => {
     const numbresForPage = [];
 
@@ -19,10 +21,17 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
     return numbresForPage;
   }, [totalPages]);
 
-  const className = totalPages > 1 ? 'pagination' : 'pagination-none';
+  useEffect(() => {
+    if (currentPage <= 2) {
+      setCurrentPages(pageNumbers.slice(0, 3));
+    } else {
+      const pages = pageNumbers.slice(currentPage - 2, currentPage + 2);
+      setCurrentPages(pages);
+    }
+  }, [currentPage, pageNumbers]);
 
   return (
-    <List className={className}>
+    <List display={totalPages > 1 ? 'flex' : 'none'} alignItems="center" justifyContent="center">
       {currentPage === 1
         ? null
         : (
@@ -36,12 +45,12 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             background="#0096c7"
             type="button"
             onClick={() => paginate(pageNumbers[0])}
-            className="button-to-left"
+            mr={5}
             leftIcon={<ArrowLeftIcon color="white" w={5} h={5} />}
           />
         )}
-      {pageNumbers.map((number) => (
-        <ListItem key={number} className="page-item">
+      {currentPages.map((number) => (
+        <ListItem key={number} mr={5}>
           <Button
             _active={{
               background: '#0077b6',
@@ -54,7 +63,6 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             type="button"
             color="white"
             onClick={() => paginate(number)}
-            className="page-link"
           >
             {number}
           </Button>
@@ -73,7 +81,6 @@ const Pagination = ({ currentPage, totalPages, paginate }) => {
             background="#0096c7"
             type="button"
             onClick={() => paginate(pageNumbers[pageNumbers.length - 1])}
-            className="button-to-right"
             rightIcon={<ArrowRightIcon color="white" w={5} h={5} />}
           />
         )}

@@ -3,8 +3,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@chakra-ui/icons';
 import { Box, Button, Text } from '@chakra-ui/react';
 
 const SortByDate = ({ sortPosts, selectedSort }) => (
-  <Box className="container-sort-arrows" background="#0096c7">
-    <Text className="text-sort">Sort By Date</Text>
+  <Box display="flex" maxH="40px" borderRadius={5} alignItems="center" background="#0096c7">
+    <Text pl="5px" fontWeight="bold" color="white">Sort By Date</Text>
     {selectedSort === 'asc' ? (
       <Button
         alignItems="center"
@@ -16,7 +16,6 @@ const SortByDate = ({ sortPosts, selectedSort }) => (
           background: '#0096c7',
         }}
         background="#0096c7"
-        p={2}
         rightIcon={<ArrowDownIcon w={5} h={5} focusable onClick={() => sortPosts('desc')} color="red" />}
       />
     ) : (
@@ -30,7 +29,6 @@ const SortByDate = ({ sortPosts, selectedSort }) => (
           background: '#0096c7',
         }}
         background="#0096c7"
-        p={2}
         rightIcon={<ArrowUpIcon w={5} h={5} focusable onClick={() => sortPosts('asc')} color="greenyellow" />}
       />
     )}

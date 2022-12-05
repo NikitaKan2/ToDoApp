@@ -5,7 +5,7 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { useState } from 'react';
 import {
-  Box, Button, Input,
+  Box, Button, Flex, Input,
 } from '@chakra-ui/react';
 import { CheckIcon, CloseIcon } from '@chakra-ui/icons';
 import { patchTask } from '../services';
@@ -15,6 +15,11 @@ const Todo = ({
 }) => {
   const [todoEditing, setTodoEditing] = useState(null);
   const [editingText, setEditingText] = useState('');
+
+  const handleDoubleClick = (e, id) => {
+    if (e.detail === 1) return;
+    setTodoEditing(id);
+  };
 
   const handleKeyDown = async (e, task) => {
     if (e.keyCode === 27) {
@@ -53,13 +58,13 @@ const Todo = ({
               background: 'inherit',
             }}
             backgroundColor="inherit"
-            leftIcon={<CheckIcon w={5} h={5} color={todo.done ? 'blackAlpha.300' : '#80ed99'} className="complete-icon" />}
+            leftIcon={<CheckIcon w={5} h={5} color={todo.done ? 'blackAlpha.300' : '#80ed99'} />}
             isDisabled={buttonDisabled}
             alignSelf="stretch"
             onClick={() => completeTodo(todo)}
           />
         </Box>
-        {todoEditing === todo.uuid ? (
+        {todoEditing === todo.id ? (
           <Input
             size="md"
             type="title"
@@ -73,9 +78,9 @@ const Todo = ({
           />
         ) : (
           <Box
-            onClick={() => setTodoEditing(todo.uuid)}
+            onClick={(e) => handleDoubleClick(e, todo.id)}
             className="todo-text"
-            key={todo.uuid}
+            key={todo.id}
             maxWidth="100%"
             wordBreak="break-all"
           >
@@ -83,10 +88,11 @@ const Todo = ({
           </Box>
         )}
       </Box>
-      <Box className="right-container">
+      <Flex align="center" alignSelf="stretch">
         <Box
-          className="todo-date"
-          key={todo.uuid}
+          pr={3}
+          wordBreak="break-all"
+          key={todo.id}
         >
           {todo.createdAt.replaceAll('-', '/').slice(0, 10)}
         </Box>
@@ -99,15 +105,15 @@ const Todo = ({
               background: 'inherit',
             }}
             backgroundColor="inherit"
-            rightIcon={<CloseIcon color="red" className="delete-icon" />}
+            rightIcon={<CloseIcon color="red" />}
             isDisabled={buttonDisabled}
-            onClick={() => removeTodo(todo.uuid)}
+            onClick={() => removeTodo(todo.id)}
             alignSelf="stretch"
             borderRadius="0px 5px 5px 0px"
             minHeight="65px"
           />
         </Box>
-      </Box>
+      </Flex>
     </Box>
   );
 };

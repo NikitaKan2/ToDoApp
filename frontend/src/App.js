@@ -9,6 +9,7 @@ import { tasksClient } from './services';
 tasksClient.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log(error);
     const notify = () => {
       toast.error(`${error.response.data.message}`, {
         position: 'top-center',

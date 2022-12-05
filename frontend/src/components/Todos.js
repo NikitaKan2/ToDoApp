@@ -9,18 +9,18 @@ const Todos = ({
 }) => {
   const [buttonDisabled, setButtonDisabled] = useState(false);
 
-  const removeTodo = async (uuid) => {
+  const removeTodo = async (id) => {
     setButtonDisabled(true);
-    await deleteTask(uuid);
+    await deleteTask(id);
     await getTasks();
     setButtonDisabled(false);
   };
 
   const completeTodo = async (todo) => {
     setButtonDisabled(true);
-    const { uuid } = todo;
+    const { id } = todo;
     const updateTodos = todos.map((post) => {
-      if (post.uuid === uuid) {
+      if (post.id === id) {
         post.done = !post.done;
       }
       return post;

@@ -4,15 +4,13 @@ import { Button, Input } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { postTask } from '../services';
 
-const TodoForm = ({ isLoading, addTodo }) => {
+const TodoForm = ({ addTodo }) => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (values) => {
     const oldTask = {
       name: values.name,
       done: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
     };
     const newTask = await postTask(oldTask);
     addTodo(newTask);
@@ -41,7 +39,6 @@ const TodoForm = ({ isLoading, addTodo }) => {
         variant="solid"
         type="submit"
         color="white"
-        isLoading={isLoading}
       >
         Add Todo
       </Button>

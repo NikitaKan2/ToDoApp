@@ -26,10 +26,11 @@ export const fetchAllTasks = async (obj) => {
       filterBy: currentFilter,
     },
   });
+  console.log(response);
   return response.data;
 };
 
-export const patchTask = (todo) => tasksClient.patch(`task/${userId}/${todo.uuid}`, todo);
+export const patchTask = (todo) => tasksClient.patch(`task/${userId}/${todo.id}`, todo);
 
 export const deleteTask = (id) => tasksClient.delete(`task/${userId}/${id}`);
 
