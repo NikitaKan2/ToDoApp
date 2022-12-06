@@ -1,5 +1,7 @@
 import React from 'react';
-import { ButtonGroup, Button, Flex } from '@chakra-ui/react';
+import {
+  ButtonGroup, Button, Flex,
+} from '@chakra-ui/react';
 import uniqid from 'uniqid';
 import SortByDate from './SortByDate';
 
@@ -21,7 +23,7 @@ const SortButtons = ({
     },
   };
   return (
-    <Flex justify="space-between" align="center" minW="450px" mb="15px">
+    <Flex justify="space-between" align="center" mb="15px">
       <ButtonGroup spacing={3} direction="row" align="center" justifyContent="center">
         {Object.values(filters).map(({ value, name }) => (
           <Button

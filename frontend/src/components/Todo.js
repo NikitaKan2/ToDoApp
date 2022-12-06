@@ -16,8 +16,7 @@ const Todo = ({
   const [todoEditing, setTodoEditing] = useState(null);
   const [editingText, setEditingText] = useState('');
 
-  const handleDoubleClick = (e, id) => {
-    if (e.detail === 1) return;
+  const handleDoubleClick = (id) => {
     setTodoEditing(id);
   };
 
@@ -78,7 +77,7 @@ const Todo = ({
           />
         ) : (
           <Box
-            onClick={(e) => handleDoubleClick(e, todo.id)}
+            onDoubleClick={() => handleDoubleClick(todo.id)}
             className="todo-text"
             key={todo.id}
             maxWidth="100%"
