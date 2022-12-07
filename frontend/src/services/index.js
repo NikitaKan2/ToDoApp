@@ -26,7 +26,6 @@ export const fetchAllTasks = async (obj) => {
       filterBy: currentFilter,
     },
   });
-  console.log(response);
   return response.data;
 };
 
