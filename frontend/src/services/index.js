@@ -29,7 +29,10 @@ export const fetchAllTasks = async (obj) => {
   return response.data;
 };
 
-export const patchTask = (todo) => tasksClient.patch(`task/${userId}/${todo.id}`, todo);
+export const patchTask = async (todo) => {
+  const { data } = await tasksClient.patch(`task/${userId}/${todo.id}`, todo);
+  return data;
+};
 
 export const deleteTask = (id) => tasksClient.delete(`task/${userId}/${id}`);
 

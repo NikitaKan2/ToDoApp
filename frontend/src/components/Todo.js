@@ -21,16 +21,15 @@ const Todo = ({
   };
 
   const handleKeyDown = async (e, task) => {
-    const { name } = task;
     if (e.keyCode === 27) {
       setTodoEditing(null);
     }
     if (e.keyCode === 13) {
       task.name = editingText;
-      await patchTask(task);
+      const [newTask] = await patchTask(task);
       setTodoEditing(null);
       setEditingText('');
-      task.name = name;
+      task.name = newTask.name;
     }
   };
 
