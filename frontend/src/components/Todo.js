@@ -17,19 +17,21 @@ const Todo = ({
   const [editingText, setEditingText] = useState('');
 
   const handleDoubleClick = (id) => {
+    setEditingText('');
     setTodoEditing(id);
   };
 
   const handleKeyDown = async (e, task) => {
     if (e.keyCode === 27) {
+      setEditingText('');
       setTodoEditing(null);
     }
     if (e.keyCode === 13) {
       task.name = editingText;
       const [newTask] = await patchTask(task);
+      task.name = newTask.name;
       setTodoEditing(null);
       setEditingText('');
-      task.name = newTask.name;
     }
   };
 
@@ -59,7 +61,7 @@ const Todo = ({
             }}
             backgroundColor="inherit"
             leftIcon={<CheckIcon w={5} h={5} color={todo.done ? 'blackAlpha.300' : '#80ed99'} />}
-            isDisabled={buttonDisabled}
+            isDisabled={buttonDisabled || todoEditing}
             alignSelf="stretch"
             onClick={() => completeTodo(todo)}
           />
