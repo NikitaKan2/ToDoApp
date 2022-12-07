@@ -9,9 +9,8 @@ import { tasksClient } from './services';
 tasksClient.interceptors.response.use(
   (response) => response,
   (error) => {
-    console.log(error);
     const notify = () => {
-      toast.error(`${error.response.data.message}`, {
+      toast.error(`${error.response.data.error}`, {
         position: 'top-center',
         autoClose: 5000,
         hideProgressBar: false,
