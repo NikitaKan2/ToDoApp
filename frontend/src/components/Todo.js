@@ -21,6 +21,7 @@ const Todo = ({
   };
 
   const handleKeyDown = async (e, task) => {
+    const { name } = task;
     if (e.keyCode === 27) {
       setTodoEditing(null);
     }
@@ -29,6 +30,7 @@ const Todo = ({
       await patchTask(task);
       setTodoEditing(null);
       setEditingText('');
+      task.name = name;
     }
   };
 
