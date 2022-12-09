@@ -1,9 +1,11 @@
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { Routes, Route } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-import TodoList from './components/TodoList';
+import RegistrationPage from './pages/RegistrationPage';
+import TodoList from './pages/tasksPage';
 import { tasksClient } from './services';
 
 tasksClient.interceptors.response.use(
@@ -26,8 +28,13 @@ tasksClient.interceptors.response.use(
 );
 
 const App = () => (
-  <ChakraProvider>
-    <TodoList />
+  <>
+    <ChakraProvider>
+      <Routes>
+        <Route path="/" element={<RegistrationPage />} />
+        <Route path="/tasks" element={<TodoList />} />
+      </Routes>
+    </ChakraProvider>
     <ToastContainer
       position="top-center"
       autoClose={5000}
@@ -40,7 +47,7 @@ const App = () => (
       pauseOnHover
       theme="dark"
     />
-  </ChakraProvider>
+  </>
 );
 
 export default App;

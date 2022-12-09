@@ -40,3 +40,11 @@ export const postTask = async (todo) => {
   const { data } = await tasksClient.post(`task/${userId}/`, todo);
   return data;
 };
+
+export const registrUser = async (user) => {
+  console.log(user);
+  const { data } = await axios.post('http://localhost:4006/registration', user);
+  localStorage.setItem('token', data.accessToken);
+  console.log(localStorage);
+  return data;
+};
