@@ -3,13 +3,13 @@ import React, { useState } from 'react';
 import {
   Input, FormLabel, Button,
 } from '@chakra-ui/react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { registrUser } from '../services';
 
 const Form = () => {
+  const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
-  const [auth, setAuth] = useState(false);
 
   const handleNameChange = (e) => setName(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -20,23 +20,20 @@ const Form = () => {
       name,
       password,
     };
-    console.log(user);
-    await registrUser(user);
-    setAuth(true);
+    const data = await registrUser(user);
+    localStorage.setItem('token', data.accessToken);
+    localStorage.setItem('uuid', data.uuid);
+    navigate('/tasks');
   };
 
   return (
     <>
-      {auth
-        ? <Link to="/tasks">Go to Tasks</Link>
-        : (
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <FormLabel>Login</FormLabel>
-            <Input mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
-            <Input mb={5} borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
-            <Button colorScheme="teal" type="submit">Submit</Button>
-          </form>
-        )}
+      <form onSubmit={(e) => handleSubmit(e)}>
+        <FormLabel>Registration</FormLabel>
+        <Input mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
+        <Input mb={5} borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
+        <Button colorScheme="teal" type="submit">Registration</Button>
+      </form>
     </>
   );
 };

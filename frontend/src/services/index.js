@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-const userId = process.env.REACT_APP_USER_ID;
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 export const tasksClient = axios.create({
@@ -18,7 +17,7 @@ export const fetchAllTasks = async (obj) => {
     currentFilter,
   } = obj;
 
-  const response = await tasksClient.get(`tasks/${userId}/`, {
+  const response = await tasksClient.get('tasks/', {
     params: {
       pp: postsPerPage,
       page: currentPage,
@@ -30,21 +29,24 @@ export const fetchAllTasks = async (obj) => {
 };
 
 export const patchTask = async (todo) => {
-  const { data } = await tasksClient.patch(`task/${userId}/${todo.id}`, todo);
+  const { data } = await tasksClient.patch(`task/${todo.id}`, todo);
   return data;
 };
 
-export const deleteTask = (id) => tasksClient.delete(`task/${userId}/${id}`);
+export const deleteTask = (id) => tasksClient.delete(`task/${id}`);
 
 export const postTask = async (todo) => {
-  const { data } = await tasksClient.post(`task/${userId}/`, todo);
+  const { data } = await tasksClient.post('task/', todo);
   return data;
 };
 
 export const registrUser = async (user) => {
-  console.log(user);
   const { data } = await axios.post('http://localhost:4006/registration', user);
-  localStorage.setItem('token', data.accessToken);
-  console.log(localStorage);
+  return data;
+};
+
+export const loginUser = async () => {
+  const id = localStorage.getItem('uuid');
+  const { data } = await axios.post('http://localhost:4006/login', id);
   return data;
 };
