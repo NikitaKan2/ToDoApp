@@ -93,7 +93,6 @@ const Todo = ({
       <Flex align="center" alignSelf="stretch">
         <Box
           pr={3}
-          wordBreak="break-all"
           key={todo.id}
         >
           {todo.createdAt.replaceAll('-', '/').slice(0, 10)}
