@@ -45,8 +45,7 @@ export const registrUser = async (user) => {
   return data;
 };
 
-export const loginUser = async () => {
-  const id = localStorage.getItem('uuid');
-  const { data } = await axios.post('http://localhost:4006/login', id);
+export const loginUser = async (user) => {
+  const { data } = await axios.post('http://localhost:4006/login', user);
   return data;
 };

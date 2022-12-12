@@ -22,7 +22,6 @@ const Form = () => {
     };
     const data = await registrUser(user);
     localStorage.setItem('token', data.accessToken);
-    localStorage.setItem('uuid', data.uuid);
     navigate('/tasks');
   };
 

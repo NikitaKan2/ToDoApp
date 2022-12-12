@@ -15,7 +15,12 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await loginUser();
+    const user = {
+      name,
+      password,
+    };
+    const data = await loginUser(user);
+    localStorage.setItem('token', data.accessToken);
     navigate('/tasks');
   };
 
