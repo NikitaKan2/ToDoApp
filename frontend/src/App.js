@@ -1,11 +1,12 @@
-import React from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
+import AuthContext from './context/index';
 import RegistrationPage from './pages/RegistrationPage';
-import LoginPage from './pages/LoginPage';
 import TodoList from './pages/tasksPage';
 import { tasksClient } from './services';
 
@@ -33,28 +34,39 @@ tasksClient.interceptors.request.use((req) => {
   return req;
 }, (error) => error);
 
-const App = () => (
-  <>
-    <ChakraProvider>
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/" element={<RegistrationPage />} />
-        <Route path="/tasks" element={<TodoList />} />
-      </Routes>
-    </ChakraProvider>
-    <ToastContainer
-      position="top-center"
-      autoClose={5000}
-      hideProgressBar={false}
-      newestOnTop={false}
-      closeOnClick
-      rtl={false}
-      pauseOnFocusLoss
-      draggable
-      pauseOnHover
-      theme="dark"
-    />
-  </>
-);
+const App = () => {
+  const [isAuth, setIsAuth] = useState(false);
+
+  return (
+    <>
+      <AuthContext.Provider value={{
+        isAuth,
+        setIsAuth,
+      }}
+      >
+        <ChakraProvider>
+          <Routes>
+            <Route path="/" element={<RegistrationPage />} />
+            <Route path="/tasks" element={isAuth ? <TodoList /> : <Navigate to="/" />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </ChakraProvider>
+      </AuthContext.Provider>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
+
+    </>
+  );
+};
 
 export default App;
