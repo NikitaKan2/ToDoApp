@@ -7,7 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 import AuthContext from './context/index';
 import RegistrationPage from './pages/RegistrationPage';
-import TodoList from './pages/tasksPage';
+import TodoList from './pages/TasksPage';
 import { tasksClient } from './services';
 
 tasksClient.interceptors.response.use(

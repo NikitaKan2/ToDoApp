@@ -51,12 +51,41 @@ const Form = () => {
     <>
       <form className="auth-from" onSubmit={(e) => handleSubmit(e)}>
         <FormLabel fontSize={20} display="flex" justifyContent="center" alignContent="center">Go to you Todo list!</FormLabel>
-        <Input mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
-        <Input mb={5} borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
+        <Input placeholder="username" mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
+        <Input placeholder="password" mb={5} borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
         {error && <Text color="red">{error}</Text>}
         <ButtonGroup mt={5} display="flex" alignItems="center" justifyContent="center">
-          <Button colorScheme="teal" type="submit" mr={5} onClick={() => setForm('signUp')}>Registration</Button>
-          <Button colorScheme="teal" type="submit" onClick={() => setForm('signIn')}>Login</Button>
+          <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
+            background="#0096c7"
+            type="submit"
+            color="white"
+            mr={5}
+            onClick={() => setForm('signUp')}
+          >
+            Registration
+
+          </Button>
+          <Button
+            _active={{
+              background: '#0077b6',
+            }}
+            _hover={{
+              background: '#0077b6',
+            }}
+            color="white"
+            background="#0096c7"
+            type="submit"
+            onClick={() => setForm('signIn')}
+          >
+            Login
+
+          </Button>
         </ButtonGroup>
       </form>
     </>
