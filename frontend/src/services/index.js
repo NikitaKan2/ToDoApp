@@ -41,11 +41,11 @@ export const postTask = async (todo) => {
 };
 
 export const registrUser = async (user) => {
-  const { data } = await axios.post('http://localhost:4006/registration', user);
+  const { data } = await axios.post('https://backend-for-todo-app.onrender.com/registration', user);
   return data;
 };
 
 export const loginUser = async (user) => {
-  const { data } = await axios.post('http://localhost:4006/login', user);
+  const { data } = await axios.post('https://backend-for-todo-app.onrender.com/login', user);
   return data;
 };
