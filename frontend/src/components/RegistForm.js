@@ -1,14 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Input, FormLabel, Button, ButtonGroup, Text,
 } from '@chakra-ui/react';
 import { useNavigate } from 'react-router-dom';
 import { registrUser, loginUser } from '../services';
-import authContext from '../context/index';
 
 const Form = () => {
-  const { setIsAuth } = useContext(authContext);
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [form, setForm] = useState('signIn');
@@ -28,7 +26,6 @@ const Form = () => {
         };
         const data = await loginUser(user);
         localStorage.setItem('token', data.accessToken);
-        setIsAuth(true);
         navigate('/tasks');
       }
       if (form === 'signUp') {
@@ -38,8 +35,8 @@ const Form = () => {
           password,
         };
         const data = await registrUser(user);
+        console.log(data);
         localStorage.setItem('token', data.accessToken);
-        setIsAuth(true);
         navigate('/tasks');
       }
     } catch (err) {
@@ -51,9 +48,9 @@ const Form = () => {
     <>
       <form className="auth-from" onSubmit={(e) => handleSubmit(e)}>
         <FormLabel fontSize={20} display="flex" justifyContent="center" alignContent="center">Go to you Todo list!</FormLabel>
-        <Input placeholder="username" mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
-        <Input placeholder="password" mb={5} borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
-        {error && <Text color="red">{error}</Text>}
+        <Input isRequired placeholder="username" mb={5} borderColor="black" type="name" value={name} onChange={handleNameChange} />
+        <Input isRequired placeholder="password" borderColor="black" type="password" value={password} onChange={handlePasswordChange} />
+        {error && <Text fontSize={13} color="red">{error}</Text>}
         <ButtonGroup mt={5} display="flex" alignItems="center" justifyContent="center">
           <Button
             _active={{
